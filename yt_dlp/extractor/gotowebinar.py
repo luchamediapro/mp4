@@ -12,7 +12,7 @@ class GoTo_WebinarIE(InfoExtractor):
                 'id': '8573274081823101697-1166504161772360449',
                 'title': 'Topology and Cache Coherence in Knights Landing and Skylake Xeon Processors',
                 'description': 'md5:2d673910d31bfb4918a0605ea60561dd',
-                'creators': 'IXPUG Committee',
+                'creators': ['IXPUG Committee'],
                 'ext': 'mp4',
             },
         },
@@ -44,6 +44,8 @@ class GoTo_WebinarIE(InfoExtractor):
             errnote='Unable to non-important download recording metadata',
             fatal=False)
 
+        creator = non_important_metadata.get('organizerName')
+
         return {
             'id': video_id,
             'url': important_metadata.get('cdnLocation'),
@@ -51,5 +53,5 @@ class GoTo_WebinarIE(InfoExtractor):
             'is_live': False,
             'title': non_important_metadata.get('subject'),
             'description': non_important_metadata.get('description'),
-            'creators': non_important_metadata.get('organizerName'),
+            'creators': [creator] if creator else None,
         }
