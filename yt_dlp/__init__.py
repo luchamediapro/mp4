@@ -431,6 +431,8 @@ def validate_options(opts):
     }
 
     # Other options
+    validate_regex('trim filenames', opts.trim_file_name, r'(?:\d+[bc]?|notrim)')
+
     if opts.playlist_items is not None:
         try:
             tuple(PlaylistEntries.parse_playlist_items(opts.playlist_items))
